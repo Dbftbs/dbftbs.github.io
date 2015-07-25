@@ -1,0 +1,9 @@
+{% include blog/is_production %}
+{% if is_production and site.blog.sharing.provider and page.blog.sharing != false %}
+
+{% case site.blog.sharing.provider %}
+{% when "custom" %}
+  {% include custom/sharing %}
+{% endcase %}
+
+{% endif %}

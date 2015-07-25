@@ -1,0 +1,20 @@
+{% include blog/is_production %}
+
+{% if is_production and site.blog.analytics.provider and page.blog.analytics != false %}
+
+{% case site.blog.analytics.provider %}
+{% when "gauges" %}
+  {% include blog/analytics-providers/gauges %}
+{% when "google" %}
+  {% include blog/analytics-providers/google %}
+{% when "getclicky" %}
+  {% include blog/analytics-providers/getclicky %}
+{% when "mixpanel" %}
+  {% include blog/analytics-providers/mixpanel %}
+{% when "piwik" %}
+  {% include blog/analytics-providers/piwik %}
+{% when "custom" %}
+  {% include custom/analytics %}
+{% endcase %}
+
+{% endif %}

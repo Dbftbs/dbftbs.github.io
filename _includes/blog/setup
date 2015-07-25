@@ -1,0 +1,23 @@
+{% capture jbcache %}
+  <!--
+  - Dynamically set liquid variables for working with URLs/paths
+  -->
+  {% include blog/is_production %}
+  {% if site.blog.setup.provider == "custom" %}
+    {% include custom/setup %}
+  {% else %}
+    {% if is_production and site.blog.BASE_PATH and site.blog.BASE_PATH != '' %}
+      {% assign BASE_PATH = site.blog.BASE_PATH %}
+      {% assign HOME_PATH = site.blog.BASE_PATH %}
+    {% else %}
+      {% assign BASE_PATH = nil %}
+      {% assign HOME_PATH = "/" %}
+    {% endif %}
+
+    {% if site.blog.ASSET_PATH %}
+      {% assign ASSET_PATH = site.blog.ASSET_PATH %}
+    {% else %}
+      {% capture ASSET_PATH %}{{ BASE_PATH }}/assets{% endcapture %}
+    {% endif %}  
+  {% endif %}
+{% endcapture %}{% assign jbcache = nil %}
